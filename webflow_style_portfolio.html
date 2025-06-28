@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name – Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Site Header Navigation -->
+  <nav class="site-header">
+    <div class="container nav-container">
+      <img src="logo.svg" alt="Your Logo" class="nav-logo" />
+      <ul class="nav-links">
+        <li><a href="#">Work</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header Reel -->
+  <header class="header">
+    <video class="reel-video" autoplay loop muted playsinline>
+      <source src="videos/reel.mp4" type="video/mp4" />
+    </video>
+  </header>
+
+  <!-- Logo Wall Section -->
+  <section class="logo-wall">
+    <div class="container">
+      <h2>Brands I've Worked With</h2>
+      <div class="logo-flex">
+        <img src="logos/logo1.png" alt="Logo 1" />
+        <img src="logos/logo2.png" alt="Logo 2" />
+        <img src="logos/logo3.png" alt="Logo 3" />
+        <!-- Add more logos as needed -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Grid Section -->
+  <section class="project-grid-section">
+    <div class="container">
+      <h2>Featured Work</h2>
+      <div class="project-grid">
+        <div class="project-card" data-video="https://www.youtube.com/embed/VIDEO_ID_1">
+          <img src="thumbs/thumb1.jpg" alt="Project 1" />
+        </div>
+        <div class="project-card" data-video="https://www.youtube.com/embed/VIDEO_ID_2">
+          <img src="thumbs/thumb2.jpg" alt="Project 2" />
+        </div>
+        <!-- Add more project cards -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Popup -->
+  <div class="video-popup" id="videoPopup">
+    <div class="popup-content">
+      <span class="close-btn" id="closePopup">&times;</span>
+      <iframe id="videoFrame" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- Contact Form -->
+  <section class="contact-section">
+    <div class="container">
+      <h2>Contact</h2>
+      <iframe src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <img src="logo.svg" alt="Your Logo" class="footer-logo" />
+      <div class="social-links">
+        <a href="#" target="_blank">Instagram</a>
+        <a href="#" target="_blank">YouTube</a>
+        <a href="#" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const cards = document.querySelectorAll('.project-card');
+    const popup = document.getElementById('videoPopup');
+    const frame = document.getElementById('videoFrame');
+    const closeBtn = document.getElementById('closePopup');
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        frame.src = card.dataset.video;
+        popup.style.display = 'flex';
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      popup.style.display = 'none';
+      frame.src = '';
+    });
+  </script>
+</body>
+</html>
