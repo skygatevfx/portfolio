@@ -137,10 +137,14 @@
 
   /* ===== Cursor ===== */
   .cursor{position:fixed; top:0; left:0; width:18px; height:18px; border:2px solid var(--aqua); border-radius:50%; pointer-events:none; transform:translate(-50%,-50%); mix-blend-mode:screen; z-index:200; opacity:.8}
-
+  
   /* Small */
   @media (max-width:880px){ .about{grid-template-columns:1fr} .nav ul{display:none} }
   @media (prefers-reduced-motion:reduce){ .btn,.card,.nav a::after{transition:none} .cursor{display:none} }
+  
+  html, body {
+  cursor: none; }
+  
 </style>
 </head>
 <body class="scan noise">
