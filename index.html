@@ -3,12 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>SKYGATE — Motion / Systems</title>
-
-<!-- Fonts: Inter + Orbitron (reverted) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+<title>SKYGATE — Motion + Systems</title>
 
 <style>
   /* ===== TOKENS (muted tech palette) ===== */
@@ -139,16 +134,6 @@
   .foot-logo{width:120px; height:36px; margin-inline:auto; border-radius:8px; background:linear-gradient(135deg,#6a7180,#525a67)}
   .social{margin-top:.75rem; display:flex; justify-content:center; gap:1rem; color:var(--fg-1)}
 
-  /* ===== Command Palette ===== */
-  .cmdk{position:fixed; inset:0; display:none; align-items:flex-start; justify-content:center; background:rgba(0,0,0,.6); z-index:120}
-  .cmdk.open{display:flex}
-  .cmdk-in{margin-top:10vh; width:min(720px,92vw); background:var(--card); border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.6)}
-  .cmdk-header{display:flex; align-items:center; gap:.6rem; padding:.75rem .9rem; border-bottom:1px solid var(--line)}
-  .cmdk-input{flex:1; background:transparent; border:none; color:var(--fg-0); outline:none; font:600 16px/1 Inter}
-  .cmdk-list{max-height:50vh; overflow:auto}
-  .cmdk-item{display:flex; align-items:center; justify-content:space-between; padding:.8rem .9rem; border-bottom:1px solid var(--line); cursor:pointer}
-  .cmdk-item:hover{background:rgba(255,255,255,.03)}
-
   /* ===== Cursor ===== */
   .cursor{position:fixed; top:0; left:0; width:18px; height:18px; border:2px solid var(--aqua); border-radius:50%; pointer-events:none; transform:translate(-50%,-50%); mix-blend-mode:screen; z-index:200; opacity:.8}
 
@@ -171,7 +156,6 @@
         <li><a href="#work">Work</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="#" id="openCmd">⌘K</a></li>
       </ul>
 
       <!-- Theme toggle switch -->
@@ -288,22 +272,6 @@
     </div>
   </footer>
 
-  <!-- Command Palette -->
-  <div class="cmdk" id="cmdk" aria-hidden="true">
-    <div class="cmdk-in">
-      <div class="cmdk-header">
-        <span style="opacity:.7">⌘/Ctrl + K</span>
-        <input class="cmdk-input" id="cmdkInput" placeholder="Type a command… e.g., 'theme', 'contact', 'work'" />
-      </div>
-      <div class="cmdk-list" id="cmdkList">
-        <div class="cmdk-item" data-action="theme">Toggle Theme <span>theme</span></div>
-        <div class="cmdk-item" data-action="work">Jump to Work <span>work</span></div>
-        <div class="cmdk-item" data-action="about">Jump to About <span>about</span></div>
-        <div class="cmdk-item" data-action="contact">Jump to Contact <span>contact</span></div>
-      </div>
-    </div>
-  </div>
-
   <div class="cursor" id="cursor" aria-hidden="true"></div>
 
 <script>
@@ -349,34 +317,6 @@ document.querySelectorAll('.card').forEach(c=>{
 closeBtn.addEventListener('click',closeVideo);
 document.addEventListener('keydown',e=>{ if(e.key==='Escape' && popup.classList.contains('open')) closeVideo(); });
 popup.addEventListener('click',e=>{ if(e.target===popup) closeVideo(); });
-
-/* ========= Command Palette (⌘/Ctrl+K) ========= */
-const cmdk=document.getElementById('cmdk'); const cmdInput=document.getElementById('cmdkInput'); const cmdList=document.getElementById('cmdkList');
-function openCmd(){ cmdk.classList.add('open'); cmdInput.value=''; cmdInput.focus(); }
-function closeCmd(){ cmdk.classList.remove('open'); }
-document.getElementById('openCmd').addEventListener('click', e=>{ e.preventDefault(); openCmd(); });
-document.addEventListener('keydown', e=>{
-  const k=e.key.toLowerCase();
-  if((e.metaKey||e.ctrlKey) && k==='k'){ e.preventDefault(); openCmd(); }
-  if(k==='escape' && cmdk.classList.contains('open')) closeCmd();
-});
-cmdk.addEventListener('click', e=>{ if(e.target===cmdk) closeCmd(); });
-cmdList.addEventListener('click', e=>{
-  const item=e.target.closest('.cmdk-item'); if(!item) return;
-  const act=item.dataset.action;
-  if(act==='theme'){ setTheme(!(root.getAttribute('data-theme')==='light')); }
-  if(act==='work'){ scrollToId('#work'); }
-  if(act==='about'){ scrollToId('#about'); }
-  if(act==='contact'){ scrollToId('#contact'); }
-  closeCmd();
-});
-cmdInput.addEventListener('input', ()=>{
-  const q=cmdInput.value.trim().toLowerCase();
-  document.querySelectorAll('.cmdk-item').forEach(it=>{
-    const t=(it.textContent||'').toLowerCase();
-    it.style.display = t.includes(q)?'flex':'none';
-  });
-});
 
 /* ========= Cursor ========= */
 const cursor=document.getElementById('cursor');
