@@ -3,34 +3,34 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>SKYGATE — Motion / Systems / Intelligence</title>
+<title>SKYGATE — Motion / Systems</title>
 
-<!-- Fonts -->
+<!-- Fonts: Inter + Orbitron (reverted) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Orbitron:wght@600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
-  /* ===== TOKENS (Muted base, restrained accents) ===== */
+  /* ===== TOKENS (muted tech palette) ===== */
   :root{
-    /* Muted grounds */
-    --bg-0:#0d0f14; --bg-1:#12151b; --bg-2:#171b22;
+    /* Grounds */
+    --bg-0:#0d1015; --bg-1:#12161c; --bg-2:#171c24;
     /* Text */
-    --fg-0:#eef1f4; --fg-1:#b5bcc8; --muted:#7c8799;
-    /* Accents (desaturated) */
-    --aqua:#58e7df; --mag:#c766b0; --chart:#c3db4f;
+    --fg-0:#eef2f6; --fg-1:#b8c0cc; --muted:#7a8697;
+    /* Accents (desaturated cyan + steel violet optional) */
+    --aqua:#4ad5cf; --vio:#8a82d6;
     /* Components */
-    --card:#121721; --glass:rgba(13,15,20,.55);
-    --line:rgba(255,255,255,.06);
+    --card:#121822; --glass:rgba(13,16,21,.55);
+    --line:rgba(255,255,255,.07);
     /* Motion & spacing */
     --rad:14px; --ease:cubic-bezier(.4,0,.2,1);
     --fast:140ms; --base:260ms; --slow:440ms;
     --sp-1:.5rem; --sp-2:1rem; --sp-3:1.5rem; --sp-4:2rem; --sp-6:3rem;
   }
   [data-theme="light"]{
-    --bg-0:#f4f6f9; --bg-1:#ffffff; --bg-2:#e9edf4;
-    --fg-0:#0c0f14; --fg-1:#2b3240; --muted:#667188;
-    --card:#ffffff; --glass:rgba(255,255,255,.65);
+    --bg-0:#f4f7fb; --bg-1:#ffffff; --bg-2:#e9eef6;
+    --fg-0:#0c1016; --fg-1:#2d3441; --muted:#667088;
+    --card:#ffffff; --glass:rgba(255,255,255,.7);
     --line:rgba(0,0,0,.08);
   }
 
@@ -40,37 +40,26 @@
     margin:0; color:var(--fg-0); background:var(--bg-0);
     font:400 16px/1.6 Inter,system-ui,Arial,sans-serif;
     -webkit-font-smoothing:antialiased;
-    /* subtle vignette + grain */
     background-image:
-      radial-gradient(1200px 600px at 80% -10%, rgba(88,231,223,.08), transparent 60%),
-      radial-gradient(800px 400px at 10% -10%, rgba(199,102,176,.06), transparent 60%);
+      radial-gradient(1100px 520px at 78% -10%, rgba(74,213,207,.08), transparent 60%),
+      radial-gradient(800px 380px at 10% -10%, rgba(138,130,214,.06), transparent 60%);
   }
   h1,h2,h3{font-family:Orbitron, Inter, system-ui, Arial, sans-serif; letter-spacing:.02em}
   a{color:inherit; text-decoration:none}
   .container{width:min(1200px,92%); margin-inline:auto}
-  .mono{font-family:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace}
 
-  /* ===== Global overlays (scanlines & noise) ===== */
-  .scanlines::before,
-  .noise::after{
-    content:""; position:fixed; pointer-events:none; inset:0; z-index:1;
-  }
-  .scanlines::before{
-    background: repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px);
-    mix-blend-mode:soft-light; opacity:.25;
-  }
-  .noise::after{
-    background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.035"/></svg>');
-    opacity:.4;
-  }
+  /* overlays */
+  .scan::before,.noise::after{content:""; position:fixed; inset:0; pointer-events:none; z-index:1}
+  .scan::before{background:repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 3px); mix-blend-mode:soft-light; opacity:.22}
+  .noise::after{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.03"/></svg>');}
 
   /* ===== Nav ===== */
   .nav{position:sticky; top:0; z-index:50; backdrop-filter:blur(10px); background:var(--glass); border-bottom:1px solid var(--line)}
   .nav-in{display:flex; align-items:center; justify-content:space-between; padding:.7rem 0}
   .brand{display:flex; align-items:center; gap:.75rem; cursor:pointer}
   .mark{width:42px;height:42px;border-radius:10px;background:
-    conic-gradient(from 220deg, var(--aqua), var(--mag), var(--aqua));
-    filter:drop-shadow(0 0 10px rgba(88,231,223,.25))}
+    conic-gradient(from 220deg, var(--aqua), var(--vio), var(--aqua));
+    filter:drop-shadow(0 0 10px rgba(74,213,207,.25))}
   .brand .name{font-weight:800; letter-spacing:.03em}
   .nav ul{display:flex; gap:1.1rem; list-style:none; padding:0; margin:0}
   .nav a{position:relative; padding:.25rem 0}
@@ -86,59 +75,58 @@
     color:var(--bg-0); display:grid; place-items:center; transition:transform var(--base) var(--ease)}
   .switch[aria-checked="true"] .knob{ transform: translateX(30px); }
   .ico{width:14px;height:14px; display:block}
-  .ico.sun{filter:drop-shadow(0 0 6px rgba(195,219,79,.35))}
-  .ico.moon{filter:drop-shadow(0 0 6px rgba(88,231,223,.35))}
+  .ico.sun{filter:drop-shadow(0 0 6px rgba(255,255,200,.25))}
+  .ico.moon{filter:drop-shadow(0 0 6px rgba(74,213,207,.35))}
 
   /* ===== Hero ===== */
   .hero{position:relative; min-height:78vh; display:grid; place-items:center; overflow:hidden}
   canvas#fx{position:absolute; inset:0; z-index:0}
   .grid{position:absolute; inset:auto 0 0 0; height:46vh;
     background:
-      linear-gradient(rgba(88,231,223,.15), transparent 60%),
-      repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 1px, transparent 1px 40px);
+      linear-gradient(rgba(74,213,207,.15), transparent 60%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 1px, transparent 1px 40px);
     mask: linear-gradient(to top, rgba(0,0,0,.9), transparent 70%);
   }
   .hero-in{position:relative; z-index:2; text-align:center; padding: 18vh 0 10vh}
   .kicker{color:var(--muted); letter-spacing:.2em; text-transform:uppercase; font-size:.8rem}
-  .title{font-size: clamp(34px, 6.5vw, 80px); line-height:1.05; text-shadow:0 0 20px rgba(88,231,223,.22)}
-  .title .cycle{display:inline-block; min-width:10ch}
+  .title{font-size: clamp(34px, 6.5vw, 80px); line-height:1.05; text-shadow:0 0 20px rgba(74,213,207,.22)}
   .subtitle{max-width:720px; margin:.9rem auto 0; color:var(--fg-1)}
   .cta{margin-top:1.2rem; display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap}
   .btn{display:inline-flex; align-items:center; gap:.5rem; padding:.75rem 1rem; border-radius:12px; border:1px solid var(--line); background:var(--card);
     transition:transform var(--base) var(--ease), box-shadow var(--base) var(--ease)}
-  .btn.primary{background:var(--aqua); color:#0b0f14; border-color:transparent}
+  .btn.primary{background:var(--aqua); color:#0d1015; border-color:transparent}
   .btn:hover{transform:translateY(-2px); box-shadow:0 12px 28px rgba(0,0,0,.35)}
 
-  /* Section */
+  /* ===== Sections ===== */
   section{padding: clamp(48px, 8vw, 96px) 0}
   .section-title{display:flex; align-items:center; gap:.8rem; margin-bottom:1rem}
-  .dot{width:10px;height:10px;border-radius:50%; background:var(--aqua); box-shadow:0 0 10px rgba(88,231,223,.45)}
+  .dot{width:10px;height:10px;border-radius:50%; background:var(--aqua); box-shadow:0 0 10px rgba(74,213,207,.45)}
 
-  /* ===== Logo wall placeholders ===== */
+  /* ===== Logo wall (placeholders) ===== */
   .logo-wall{display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:1.1rem; margin-top:1.3rem}
-  .logo-cell{height:60px; border-radius:12px; background:linear-gradient(180deg,#646b76,#545b66); display:grid; place-items:center; color:#12151b; font-weight:800; letter-spacing:.08em}
+  .logo-cell{height:60px; border-radius:12px; background:linear-gradient(180deg,#5f6672,#4d5561); display:grid; place-items:center; color:#12161c; font-weight:800; letter-spacing:.08em}
 
-  /* ===== Work grid (parallax tilt) ===== */
+  /* ===== Work grid ===== */
   .grid-wrap{margin-top:1.25rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.2rem}
   .card{position:relative; background:var(--card); border:1px solid var(--line); border-radius:var(--rad); overflow:hidden; transform:translateY(18px) scale(.98); opacity:0; will-change:transform}
   .card.reveal{transform:translateY(0) scale(1); opacity:1; transition:transform var(--base) var(--ease), opacity var(--base) var(--ease)}
-  .thumb{height:190px; background:linear-gradient(135deg,#6c727d,#4d5460)}
+  .thumb{height:190px; background:linear-gradient(135deg,#6a7180,#525a67)}
   .card h3{margin:.9rem .9rem 0}
   .meta{margin:.35rem .9rem 1rem; color:var(--muted); font-size:.92rem}
   .play{position:absolute; top:12px; right:12px; width:34px; height:34px; border-radius:50%; background:var(--aqua); display:grid; place-items:center;
-    box-shadow:0 0 14px rgba(88,231,223,.35)}
-  .play:before{content:""; border-style:solid; border-width:7px 0 7px 11px; border-color:transparent transparent transparent #0b0f14; margin-left:2px}
+    box-shadow:0 0 14px rgba(74,213,207,.35)}
+  .play:before{content:""; border-style:solid; border-width:7px 0 7px 11px; border-color:transparent transparent transparent #0d1015; margin-left:2px}
 
   /* ===== Popup ===== */
   .popup{position:fixed; inset:0; background:rgba(0,0,0,.85); display:none; align-items:center; justify-content:center; z-index:100}
   .popup.open{display:flex}
-  .popup-in{position:relative; width:min(92vw, 1000px); aspect-ratio:16/9; background:#1c2230; border-radius:16px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.6)}
+  .popup-in{position:relative; width:min(92vw, 1000px); aspect-ratio:16/9; background:#1b2130; border-radius:16px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.6)}
   .popup .close{position:absolute; top:-44px; right:0; font-size:28px; cursor:pointer; color:#fff}
 
   /* ===== About ===== */
   .about{display:grid; grid-template-columns:1.1fr .9fr; gap:1.5rem}
   .pane{background:var(--card); border:1px solid var(--line); border-radius:var(--rad); padding:var(--sp-3)}
-  .ph{height:260px; background:linear-gradient(135deg,#6c727d,#4d5460); border-radius:10px}
+  .ph{height:260px; background:linear-gradient(135deg,#6a7180,#525a67); border-radius:10px}
 
   /* ===== Contact ===== */
   .contact form{max-width:640px; margin:auto; display:grid; gap:.9rem}
@@ -148,7 +136,7 @@
 
   /* ===== Footer ===== */
   .footer{padding:2rem 0; border-top:1px solid var(--line); text-align:center}
-  .foot-logo{width:120px; height:36px; margin-inline:auto; border-radius:8px; background:linear-gradient(135deg,#6c727d,#4d5460)}
+  .foot-logo{width:120px; height:36px; margin-inline:auto; border-radius:8px; background:linear-gradient(135deg,#6a7180,#525a67)}
   .social{margin-top:.75rem; display:flex; justify-content:center; gap:1rem; color:var(--fg-1)}
 
   /* ===== Command Palette ===== */
@@ -164,11 +152,12 @@
   /* ===== Cursor ===== */
   .cursor{position:fixed; top:0; left:0; width:18px; height:18px; border:2px solid var(--aqua); border-radius:50%; pointer-events:none; transform:translate(-50%,-50%); mix-blend-mode:screen; z-index:200; opacity:.8}
 
-  /* ===== Small screens ===== */
+  /* Small */
   @media (max-width:880px){ .about{grid-template-columns:1fr} .nav ul{display:none} }
+  @media (prefers-reduced-motion:reduce){ .btn,.card,.nav a::after{transition:none} .cursor{display:none} }
 </style>
 </head>
-<body class="scanlines noise">
+<body class="scan noise">
 
   <!-- NAV -->
   <nav class="nav">
@@ -186,7 +175,7 @@
       </ul>
 
       <!-- Theme toggle switch -->
-      <div class="toggle">
+      <div class="toggle" aria-label="Theme">
         <svg class="ico sun" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.79zm10.48 0l1.79-1.79l1.79 1.79l-1.79 1.79zM1 13h3v-2H1zm19 0h3v-2h-3zM6.76 19.16l-1.8 1.79l1.79 1.79l1.79-1.79zM17.24 19.16l1.79 1.79l1.79-1.79l-1.79-1.79zM12 6a6 6 0 106 6a6 6 0 00-6-6z"/></svg>
         <div class="switch" id="themeSwitch" role="switch" aria-checked="false" tabindex="0">
           <div class="knob">
@@ -203,9 +192,9 @@
     <canvas id="fx" aria-hidden="true"></canvas>
     <div class="grid" aria-hidden="true"></div>
     <div class="hero-in container">
-      <div class="kicker mono">MOTION / SYSTEMS / INTELLIGENCE</div>
-      <h1 class="title">We build <span class="cycle mono">Motion</span>-driven, systemized experiences</h1>
-      <p class="subtitle">Top-tier digital production for artists & brands — abstract VFX, realtime pipelines, and AI-assisted storytelling.</p>
+      <div class="kicker">MOTION / SYSTEMS</div>
+      <h1 class="title">We build motion-driven, systemized experiences</h1>
+      <p class="subtitle">Digital production for artists & brands — abstract VFX, realtime pipelines, and AI-assisted narratives.</p>
       <div class="cta">
         <a class="btn primary" href="#work">View Work</a>
         <a class="btn" href="#contact">Start a Project</a>
@@ -226,19 +215,19 @@
   <section id="work" class="container">
     <div class="section-title"><span class="dot"></span><h2>Featured Systems</h2></div>
     <div class="grid-wrap">
-      <article class="card tilt" tabindex="0" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+      <article class="card" tabindex="0" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
         <div class="thumb"></div>
         <h3>Neon Mesh</h3>
         <div class="meta">Realtime VFX · AI assist</div>
         <div class="play" aria-hidden="true"></div>
       </article>
-      <article class="card tilt" tabindex="0" data-video="https://player.vimeo.com/video/76979871?h=bf3e7c3b5e">
+      <article class="card" tabindex="0" data-video="https://player.vimeo.com/video/76979871?h=bf3e7c3b5e">
         <div class="thumb"></div>
         <h3>Signal Array</h3>
         <div class="meta">Brand film · Motion identity</div>
         <div class="play" aria-hidden="true"></div>
       </article>
-      <article class="card tilt" tabindex="0" data-video="videos/demo.mp4">
+      <article class="card" tabindex="0" data-video="videos/demo.mp4">
         <div class="thumb"></div>
         <h3>Void Engine</h3>
         <div class="meta">Self-hosted · Prototype</div>
@@ -262,7 +251,7 @@
       <div class="pane">
         <div class="ph"></div>
         <p style="margin-top:.75rem;color:var(--fg-1)">
-          SKYGATE is a digital studio integrating <span class="mono">motion</span>, <span class="mono">systems</span>, and <span class="mono">intelligence</span> to deliver experiential media.
+          SKYGATE is a digital studio integrating motion and systems to deliver experiential media.
           We prototype with realtime and augment with AI — then lock quality in post.
         </p>
       </div>
@@ -303,14 +292,14 @@
   <div class="cmdk" id="cmdk" aria-hidden="true">
     <div class="cmdk-in">
       <div class="cmdk-header">
-        <span class="mono" style="opacity:.7">⌘/Ctrl + K</span>
+        <span style="opacity:.7">⌘/Ctrl + K</span>
         <input class="cmdk-input" id="cmdkInput" placeholder="Type a command… e.g., 'theme', 'contact', 'work'" />
       </div>
       <div class="cmdk-list" id="cmdkList">
-        <div class="cmdk-item" data-action="theme">Toggle Theme <span class="mono">theme</span></div>
-        <div class="cmdk-item" data-action="work">Jump to Work <span class="mono">work</span></div>
-        <div class="cmdk-item" data-action="about">Jump to About <span class="mono">about</span></div>
-        <div class="cmdk-item" data-action="contact">Jump to Contact <span class="mono">contact</span></div>
+        <div class="cmdk-item" data-action="theme">Toggle Theme <span>theme</span></div>
+        <div class="cmdk-item" data-action="work">Jump to Work <span>work</span></div>
+        <div class="cmdk-item" data-action="about">Jump to About <span>about</span></div>
+        <div class="cmdk-item" data-action="contact">Jump to Contact <span>contact</span></div>
       </div>
     </div>
   </div>
@@ -338,28 +327,9 @@ document.querySelectorAll('.nav a').forEach(a=>{
 });
 document.getElementById('logoTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
-/* ========= AI-style word cycler ========= */
-const words=['Motion','Systems','Intelligence','Signals','Physics'];
-const el=document.querySelector('.cycle'); let i=0;
-setInterval(()=>{ i=(i+1)%words.length; el.textContent = words[i]; }, 1700);
-
 /* ========= Scroll reveal ========= */
 const obs=new IntersectionObserver((entries)=>entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('reveal'); obs.unobserve(e.target);} }),{threshold:.2});
 document.querySelectorAll('.card').forEach(el=>obs.observe(el));
-
-/* ========= Parallax tilt for cards ========= */
-document.querySelectorAll('.tilt').forEach(card=>{
-  let rAF=null;
-  function tilt(e){
-    const rect=card.getBoundingClientRect();
-    const x=(e.clientX - rect.left)/rect.width, y=(e.clientY - rect.top)/rect.height;
-    const rx=(y-0.5)*6, ry=(x-0.5)*-6;
-    card.style.transform=`perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(0)`;
-  }
-  card.addEventListener('mouseenter',()=>{card.style.transition='transform 120ms var(--ease)';});
-  card.addEventListener('mousemove',e=>{ cancelAnimationFrame(rAF); rAF=requestAnimationFrame(()=>tilt(e)); });
-  card.addEventListener('mouseleave',()=>{ card.style.transition='transform 260ms var(--ease)'; card.style.transform='translateY(0)';});
-});
 
 /* ========= Popup (iframe or mp4) ========= */
 const popup=document.getElementById('popup'); const closeBtn=document.getElementById('closeBtn'); let frame=document.getElementById('frame');
@@ -408,7 +378,7 @@ cmdInput.addEventListener('input', ()=>{
   });
 });
 
-/* ========= Custom cursor ========= */
+/* ========= Cursor ========= */
 const cursor=document.getElementById('cursor');
 document.addEventListener('pointermove',e=>{ cursor.style.transform=`translate(${e.clientX}px,${e.clientY}px)`; });
 ['a','.btn','.card','.cmdk-item'].forEach(sel=>{
@@ -418,17 +388,17 @@ document.addEventListener('pointermove',e=>{ cursor.style.transform=`translate($
   });
 });
 
-/* ========= Canvas particles (muted aqua) ========= */
+/* ========= Canvas particles ========= */
 const cvs=document.getElementById('fx'), ctx=cvs.getContext('2d'); let W=0,H=0, parts=[];
 function resize(){ W=cvs.width=window.innerWidth; H=cvs.height=Math.max(360, window.innerHeight*0.75); }
-function rand(n){ return Math.random()*n; }
-function init(){ resize(); parts = Array.from({length:120},()=>({x:rand(W), y:rand(H), z:Math.random()*2+0.5, r:Math.random()*1.6+0.4})); }
+function r(n){ return Math.random()*n; }
+function init(){ resize(); parts = Array.from({length:120},()=>({x:r(W), y:r(H), z:Math.random()*2+0.5, r:Math.random()*1.6+0.4})); }
 function tick(){
   ctx.clearRect(0,0,W,H);
   for(const p of parts){
-    p.y += p.z*0.32; if(p.y>H) p.y=-10, p.x=rand(W);
+    p.y += p.z*0.32; if(p.y>H) p.y=-10, p.x=r(W);
     ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle='rgba(88,231,223,.32)'; ctx.fill();
+    ctx.fillStyle='rgba(74,213,207,.3)'; ctx.fill();
   }
   requestAnimationFrame(tick);
 }
