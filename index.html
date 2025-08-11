@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -321,12 +322,16 @@ popup.addEventListener('click',e=>{ if(e.target===popup) closeVideo(); });
 /* ========= Cursor ========= */
 const cursor=document.getElementById('cursor');
 document.addEventListener('pointermove',e=>{ cursor.style.transform=`translate(${e.clientX}px,${e.clientY}px)`; });
+  
 ['a','.btn','.card','.cmdk-item'].forEach(sel=>{
   document.querySelectorAll(sel).forEach(el=>{
     el.addEventListener('mouseenter',()=> cursor.style.transform+=' scale(1.2)');
     el.addEventListener('mouseleave',()=> cursor.style.transform+=' scale(1)');
   });
 });
+  
+// Hide default cursor once custom cursor is ready
+document.body.style.cursor = 'none';
 
 /* ========= Canvas particles ========= */
 const cvs=document.getElementById('fx'), ctx=cvs.getContext('2d'); let W=0,H=0, parts=[];
