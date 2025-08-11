@@ -3,64 +3,97 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Name – Portfolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="brand_assets/theme-tokens.css">
-<link rel="stylesheet" href="styles.css">
+  <title>Portfolio – Functionality Test</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #111; color: #eee; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+
+    /* Nav */
+    .site-header { background: #222; padding: 1rem 0; position: sticky; top: 0; z-index: 10; }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { width: 120px; height: 40px; background: #555; }
+    .nav-links { list-style: none; display: flex; gap: 2rem; }
+    .nav-links li a:hover { color: #0ff; }
+
+    /* Header reel */
+    .header video, .header .video-placeholder { width: 100%; height: 60vh; object-fit: cover; background: #555; display: block; }
+
+    /* Logo wall */
+    .logo-wall { padding: 4rem 0; text-align: center; }
+    .logo-flex { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 2rem; }
+    .logo-placeholder { width: 120px; height: 60px; background: #555; }
+
+    /* Project grid */
+    .project-grid-section { padding: 4rem 0; }
+    .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
+    .project-card img { width: 100%; height: 180px; background: #555; display: block; }
+
+    /* Popup */
+    .video-popup { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 999; }
+    .popup-content { position: relative; width: 90%; max-width: 960px; aspect-ratio: 16/9; background: #333; }
+    .close-btn { position: absolute; top: -40px; right: 0; font-size: 2rem; color: #fff; cursor: pointer; }
+
+    /* Contact */
+    .contact-section { padding: 4rem 0; background: #1a1a1a; }
+    .contact-section form { max-width: 600px; margin: auto; display: flex; flex-direction: column; gap: 1rem; }
+    .contact-section input, .contact-section textarea, .contact-section button {
+      padding: 1rem; border: 1px solid #333; border-radius: 4px; font-size: 1rem;
+    }
+    .contact-section button { background: #0ff; color: #000; font-weight: bold; cursor: pointer; }
+
+    /* Footer */
+    .footer { padding: 2rem 0; text-align: center; background: #000; }
+    .footer-logo { width: 100px; height: 30px; background: #555; margin-bottom: 1rem; }
+    .social-links a { margin: 0 1rem; color: #888; }
+    .social-links a:hover { color: #0ff; }
+  </style>
 </head>
 <body>
-  
-  <!-- Site Header Navigation -->
+  <!-- Nav -->
   <nav class="site-header">
     <div class="container nav-container">
-      <img src="logo.svg" alt="Your Logo" class="nav-logo" />
+      <div class="nav-logo" id="logo"></div>
       <ul class="nav-links">
         <li><a href="#work">Work</a></li>
-        <li><a href="#brands">Brands</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Header Reel -->
+  <!-- Header reel -->
   <header class="header">
-    <video class="reel-video" autoplay loop muted playsinline poster="thumbs/reel-poster.jpg">
-  <source src="videos/reel.mp4" type="video/mp4">
-</video>
+    <div class="video-placeholder"></div>
   </header>
 
-  <!-- Logo Wall Section -->
-  <section id="brands" class="logo-wall">
+  <!-- Logo wall -->
+  <section class="logo-wall">
     <div class="container">
       <h2>Brands I've Worked With</h2>
       <div class="logo-flex">
-        <div class="logo-placeholder">Logo 1</div>
-        <div class="logo-placeholder">Logo 2</div>
-        <div class="logo-placeholder">Logo 3</div>
-        <!-- Add more logos as needed -->
+        <div class="logo-placeholder"></div>
+        <div class="logo-placeholder"></div>
+        <div class="logo-placeholder"></div>
       </div>
     </div>
   </section>
 
-  <!-- Video Grid Section -->
+  <!-- Project grid -->
   <section id="work" class="project-grid-section">
     <div class="container">
       <h2>Featured Work</h2>
       <div class="project-grid">
-        <div class="project-card" data-video="https://www.youtube.com/embed/VIDEO_ID_1">
-          <div class="thumb-placeholder">Project 1</div>
+        <div class="project-card" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+          <img alt="Project 1">
         </div>
-        <div class="project-card" data-video="https://www.youtube.com/embed/VIDEO_ID_2">
-          <div class="thumb-placeholder">Project 2</div>
+        <div class="project-card" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+          <img alt="Project 2">
         </div>
-        <!-- Add more project cards -->
       </div>
     </div>
   </section>
 
-  <!-- Video Popup -->
+  <!-- Popup -->
   <div class="video-popup" id="videoPopup">
     <div class="popup-content">
       <span class="close-btn" id="closePopup">&times;</span>
@@ -68,63 +101,65 @@
     </div>
   </div>
 
-  <!-- Contact Form -->
+  <!-- Contact -->
   <section id="contact" class="contact-section">
     <div class="container">
       <h2>Contact</h2>
-      <div class="contact-actions">
-        <a class="btn" href="mailto:your@example.com">Email Me</a>
-      </div>
-      <iframe src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" required></textarea>
+        <button type="submit">Send</button>
+      </form>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="container">
-      <img src="logo.svg" alt="Your Logo" class="footer-logo" />
-      <div class="social-links">
-        <a href="#" target="_blank">Instagram</a>
-        <a href="#" target="_blank">YouTube</a>
-        <a href="#" target="_blank">LinkedIn</a>
-      </div>
+    <div class="footer-logo"></div>
+    <div class="social-links">
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">LinkedIn</a>
     </div>
   </footer>
 
   <script>
-    const cards = document.querySelectorAll('.project-card');
-    const popup = document.getElementById('videoPopup');
-    const frame = document.getElementById('videoFrame');
-    const closeBtn = document.getElementById('closePopup');
-    const logo = document.querySelector('.nav-logo');
-
-    cards.forEach(card => {
-      card.addEventListener('click', () => {
-        frame.src = card.dataset.video;
-        popup.classList.add('active');
-      });
-    });
-
-    closeBtn.addEventListener('click', () => {
-      popup.classList.remove('active');
-      frame.src = '';
-    });
-
+    // Smooth scroll
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', e => {
-        const targetId = link.getAttribute('href');
-        if (targetId.startsWith('#')) {
-          e.preventDefault();
-          const target = document.querySelector(targetId);
-          if (target) target.scrollIntoView({ behavior: 'smooth' });
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
         }
       });
     });
 
-    logo.addEventListener('click', () => {
+    // Logo click scroll to top
+    document.getElementById('logo').addEventListener('click', e => {
+      e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+
+    // Popup logic
+    const cards = document.querySelectorAll('.project-card');
+    const popup = document.getElementById('videoPopup');
+    let frame = document.getElementById('videoFrame');
+    const closeBtn = document.getElementById('closePopup');
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const videoUrl = card.dataset.video;
+        frame.src = videoUrl;
+        popup.style.display = 'flex';
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      popup.style.display = 'none';
+      frame.src = '';
+    });
   </script>
-  <script src="scripts.js"></script>
 </body>
 </html>
